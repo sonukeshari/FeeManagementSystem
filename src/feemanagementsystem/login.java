@@ -4,6 +4,8 @@
  */
 package feemanagementsystem;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Sonu Keshari
@@ -29,12 +31,12 @@ public class login extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_username = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        txt_password = new javax.swing.JPasswordField();
+        btnlogin = new javax.swing.JButton();
+        btnSignup = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -54,35 +56,75 @@ public class login extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("UserName");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 110, 30));
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 230, 30));
+        jPanel2.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 230, 30));
 
         jLabel3.setBackground(new java.awt.Color(102, 0, 102));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Password\n");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 110, 30));
-        jPanel2.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 230, 30));
+        jPanel2.add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 230, 30));
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 0));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("login");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 110, 30));
+        btnlogin.setBackground(new java.awt.Color(0, 153, 0));
+        btnlogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnlogin.setText("login");
+        btnlogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnloginActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 110, 30));
 
-        jButton2.setBackground(new java.awt.Color(204, 0, 0));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("Signup");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 110, 30));
+        btnSignup.setBackground(new java.awt.Color(204, 0, 0));
+        btnSignup.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSignup.setText("Signup");
+        btnSignup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignupActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnSignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 110, 30));
 
-        jButton3.setBackground(new java.awt.Color(153, 102, 255));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Exit");
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 110, 30));
+        btnExit.setBackground(new java.awt.Color(153, 102, 255));
+        btnExit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 110, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 380));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
+        // TODO add your handling code here:
+        String username = txt_username.getText();
+        String password = txt_password.getText();
+        
+        if(username.trim().equals("")||password.trim().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Please enter your username and password");
+             
+        }
+    }//GEN-LAST:event_btnloginActionPerformed
+
+    private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
+        // TODO add your handling code here:
+        Signupform signup = new Signupform();
+        signup.show();
+        this.dispose();
+        
+    }//GEN-LAST:event_btnSignupActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,14 +162,14 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnSignup;
+    private javax.swing.JButton btnlogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField txt_password;
+    private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 }
