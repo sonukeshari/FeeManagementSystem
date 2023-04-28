@@ -77,6 +77,14 @@ public class Addfee extends javax.swing.JFrame {
         jTextField10 = new javax.swing.JTextField();
         jTextField11 = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
+        jTextField12 = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jSeparator4 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -285,13 +293,41 @@ public class Addfee extends javax.swing.JFrame {
         jLabel24.setBackground(new java.awt.Color(51, 102, 255));
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel24.setText("Edutax 7.5%");
-        jPanel10.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, -1, 20));
-        jPanel10.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 300, 30));
+        jPanel10.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, -1, 20));
+        jPanel10.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 300, 30));
         jPanel10.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 180, 160, 30));
-        jPanel10.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 160, 20));
-        jPanel10.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, 160, 20));
-        jPanel10.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 170, 20));
+        jPanel10.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 160, 30));
+        jPanel10.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 258, 160, -1));
+        jPanel10.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 290, 180, 30));
         jPanel10.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 283, 200, 10));
+        jPanel10.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 320, 30));
+
+        jLabel25.setBackground(new java.awt.Color(51, 102, 255));
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel25.setText("words");
+        jPanel10.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 70, 30));
+
+        jLabel26.setBackground(new java.awt.Color(51, 102, 255));
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel26.setText("Rev. Signature");
+        jPanel10.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 390, 170, 30));
+
+        jLabel27.setBackground(new java.awt.Color(51, 102, 255));
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel27.setText("Remarks");
+        jPanel10.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 80, 30));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel10.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 320, 60));
+        jPanel10.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 380, 190, -1));
+
+        jButton1.setBackground(new java.awt.Color(255, 0, 0));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jButton1.setText("Print");
+        jPanel10.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, 180, 30));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -405,6 +441,7 @@ public class Addfee extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -425,6 +462,9 @@ public class Addfee extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -442,12 +482,16 @@ public class Addfee extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
