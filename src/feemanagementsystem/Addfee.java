@@ -15,8 +15,15 @@ public class Addfee extends javax.swing.JFrame {
      */
     public Addfee() {
         initComponents();
+        displayCashfirst();
     }
-
+ public void displayCashfirst(){
+     lbl_checkNo.setVisible(false);
+     lbl_BankName.setVisible(false);
+     
+     txt_checkNo.setVisible(false);
+     txt_bankName.setVisible(false);
+ }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,28 +48,28 @@ public class Addfee extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        panelParent = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        lbl_checkNo = new javax.swing.JLabel();
+        lbl_BankName = new javax.swing.JLabel();
+        txt_receipts = new javax.swing.JTextField();
+        comboPaymentMode = new javax.swing.JComboBox<>();
+        txt_checkNo = new javax.swing.JTextField();
+        txt_bankName = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        datechooser = new com.toedter.calendar.JDateChooser();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
+        lbl_regNo = new javax.swing.JLabel();
+        panelchild = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txt_receivedFrom = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txt_firstYear = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txt_lastYear = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboxCourse = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
@@ -71,20 +78,20 @@ public class Addfee extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        txt_CourseName = new javax.swing.JTextField();
+        txt_amount = new javax.swing.JTextField();
+        txt_vat = new javax.swing.JTextField();
+        txt_edutax = new javax.swing.JTextField();
+        txt_totalAmount = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        jTextField12 = new javax.swing.JTextField();
+        txt_words = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txt_areaRemarks = new javax.swing.JTextArea();
         jSeparator4 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        btn_print = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -193,31 +200,36 @@ public class Addfee extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 690));
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 255));
-        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+        panelParent.setBackground(new java.awt.Color(102, 102, 255));
+        panelParent.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setBackground(new java.awt.Color(51, 102, 255));
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setText("ReciptsNo Hstu-");
+        jLabel8.setText("ReceiptsNo Hstu-");
 
         jLabel9.setBackground(new java.awt.Color(51, 102, 255));
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("Mode of Payment");
 
-        jLabel10.setBackground(new java.awt.Color(51, 102, 255));
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel10.setText("Cheque No.");
+        lbl_checkNo.setBackground(new java.awt.Color(51, 102, 255));
+        lbl_checkNo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_checkNo.setText("Cheque No.");
 
-        jLabel11.setBackground(new java.awt.Color(51, 102, 255));
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel11.setText("Bank Name");
+        lbl_BankName.setBackground(new java.awt.Color(51, 102, 255));
+        lbl_BankName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_BankName.setText("Bank Name");
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Cheque", "Card" }));
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        comboPaymentMode.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboPaymentMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Cheque", "Card" }));
+        comboPaymentMode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                comboPaymentModeActionPerformed(evt);
+            }
+        });
+
+        txt_checkNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_checkNoActionPerformed(evt);
             }
         });
 
@@ -229,181 +241,208 @@ public class Addfee extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setText("REG-NO-");
 
-        jLabel14.setBackground(new java.awt.Color(51, 102, 255));
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel14.setText("DP00edu92042");
+        lbl_regNo.setBackground(new java.awt.Color(51, 102, 255));
+        lbl_regNo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_regNo.setText("DP00edu92042");
 
-        jPanel10.setBackground(new java.awt.Color(102, 102, 255));
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelchild.setBackground(new java.awt.Color(102, 102, 255));
+        panelchild.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel15.setBackground(new java.awt.Color(51, 102, 255));
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setText("Received From:");
-        jPanel10.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 110, 20));
-        jPanel10.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 310, -1));
+        panelchild.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 110, 20));
+        panelchild.add(txt_receivedFrom, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 310, -1));
 
         jLabel16.setBackground(new java.awt.Color(51, 102, 255));
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel16.setText("Payment For the Year:");
-        jPanel10.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
-        jPanel10.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 120, -1));
+        panelchild.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+        panelchild.add(txt_firstYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 120, -1));
 
         jLabel17.setBackground(new java.awt.Color(51, 102, 255));
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel17.setText("To");
-        jPanel10.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 30, -1));
-        jPanel10.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 120, 20));
+        panelchild.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 30, -1));
+        panelchild.add(txt_lastYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 120, 20));
 
         jLabel18.setBackground(new java.awt.Color(51, 102, 255));
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel18.setText("Course:");
-        jPanel10.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 100, 20));
+        panelchild.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 100, 20));
 
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Cheque", "Card" }));
-        jPanel10.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 190, 30));
+        comboxCourse.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboxCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Cheque", "Card" }));
+        panelchild.add(comboxCourse, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 190, 30));
 
         jLabel19.setBackground(new java.awt.Color(51, 102, 255));
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel19.setText("RollNO:");
-        jPanel10.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 70, 20));
-        jPanel10.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 700, 10));
-        jPanel10.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 700, 10));
+        panelchild.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 70, 20));
+        panelchild.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 700, 10));
+        panelchild.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 700, 10));
 
         jLabel20.setBackground(new java.awt.Color(51, 102, 255));
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel20.setText("RollNO:");
-        jPanel10.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 70, 20));
+        panelchild.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 70, 20));
 
         jLabel21.setBackground(new java.awt.Color(51, 102, 255));
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel21.setText("Head");
-        jPanel10.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 70, 20));
+        panelchild.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 70, 20));
 
         jLabel22.setBackground(new java.awt.Color(51, 102, 255));
         jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel22.setText("Amount");
-        jPanel10.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 90, 20));
+        panelchild.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 90, 20));
 
         jLabel23.setBackground(new java.awt.Color(51, 102, 255));
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel23.setText("VAT 7.5%");
-        jPanel10.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, -1, -1));
+        panelchild.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, -1, -1));
 
         jLabel24.setBackground(new java.awt.Color(51, 102, 255));
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel24.setText("Edutax 7.5%");
-        jPanel10.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, -1, 20));
-        jPanel10.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 300, 30));
-        jPanel10.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 180, 160, 30));
-        jPanel10.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 160, 30));
-        jPanel10.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 258, 160, -1));
-        jPanel10.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 290, 180, 30));
-        jPanel10.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 283, 200, 10));
-        jPanel10.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 320, 30));
+        panelchild.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, -1, 20));
+        panelchild.add(txt_CourseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 300, 30));
+        panelchild.add(txt_amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 180, 160, 30));
+        panelchild.add(txt_vat, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 160, 30));
+        panelchild.add(txt_edutax, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 258, 160, -1));
+        panelchild.add(txt_totalAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, 180, 30));
+        panelchild.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 200, -1));
+        panelchild.add(txt_words, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 320, 30));
 
         jLabel25.setBackground(new java.awt.Color(51, 102, 255));
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel25.setText("words");
-        jPanel10.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 70, 30));
+        panelchild.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 70, 30));
 
         jLabel26.setBackground(new java.awt.Color(51, 102, 255));
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel26.setText("Rev. Signature");
-        jPanel10.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 390, 170, 30));
+        panelchild.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 390, 170, 30));
 
         jLabel27.setBackground(new java.awt.Color(51, 102, 255));
         jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel27.setText("Remarks");
-        jPanel10.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 80, 30));
+        panelchild.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 80, 30));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txt_areaRemarks.setColumns(20);
+        txt_areaRemarks.setRows(5);
+        jScrollPane1.setViewportView(txt_areaRemarks);
 
-        jPanel10.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 320, 60));
-        jPanel10.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 380, 190, -1));
+        panelchild.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 320, 60));
+        panelchild.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 380, 190, -1));
 
-        jButton1.setBackground(new java.awt.Color(255, 0, 0));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jButton1.setText("Print");
-        jPanel10.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, 180, 30));
+        btn_print.setBackground(new java.awt.Color(255, 0, 0));
+        btn_print.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        btn_print.setText("Print");
+        panelchild.add(btn_print, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, 180, 30));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelParentLayout = new javax.swing.GroupLayout(panelParent);
+        panelParent.setLayout(panelParentLayout);
+        panelParentLayout.setHorizontalGroup(
+            panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelParentLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelParentLayout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_receipts, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panelParentLayout.createSequentialGroup()
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lbl_regNo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelParentLayout.createSequentialGroup()
                                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(datechooser, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(30, 30, 30))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelParentLayout.createSequentialGroup()
+                        .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11))
+                            .addComponent(lbl_checkNo)
+                            .addComponent(lbl_BankName))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jComboBox1, 0, 155, Short.MAX_VALUE)
-                                .addComponent(jTextField2))
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(comboPaymentMode, 0, 155, Short.MAX_VALUE)
+                                .addComponent(txt_checkNo))
+                            .addComponent(txt_bankName, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(panelchild, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        panelParentLayout.setVerticalGroup(
+            panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelParentLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(jLabel12))
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(datechooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_receipts, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14)
+                    .addComponent(comboPaymentMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_regNo)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_checkNo)
+                    .addComponent(txt_checkNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_BankName)
+                    .addComponent(txt_bankName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelchild, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 720, 690));
+        getContentPane().add(panelParent, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 720, 690));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txt_checkNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_checkNoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txt_checkNoActionPerformed
+
+    private void comboPaymentModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPaymentModeActionPerformed
+        // TODO add your handling code here:
+        if(comboPaymentMode.getSelectedIndex()==0){
+             lbl_checkNo.setVisible(false);
+             lbl_BankName.setVisible(false);
+     
+             txt_checkNo.setVisible(false);
+             txt_bankName.setVisible(false);
+        }
+        
+         if(comboPaymentMode.getSelectedIndex()==1){
+             lbl_checkNo.setVisible(true);
+             lbl_BankName.setVisible(true);
+     
+             txt_checkNo.setVisible(true);
+             txt_bankName.setVisible(true);
+             
+        }
+          if(comboPaymentMode.getSelectedIndex()==2){
+             lbl_checkNo.setVisible(false);
+             lbl_BankName.setVisible(true);
+     
+             txt_checkNo.setVisible(false);
+             txt_bankName.setVisible(true);
+        }
+    }//GEN-LAST:event_comboPaymentModeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -441,16 +480,13 @@ public class Addfee extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JButton btn_print;
+    private javax.swing.JComboBox<String> comboPaymentMode;
+    private javax.swing.JComboBox<String> comboxCourse;
+    private com.toedter.calendar.JDateChooser datechooser;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -473,8 +509,6 @@ public class Addfee extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -487,18 +521,23 @@ public class Addfee extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel lbl_BankName;
+    private javax.swing.JLabel lbl_checkNo;
+    private javax.swing.JLabel lbl_regNo;
+    private javax.swing.JPanel panelParent;
+    private javax.swing.JPanel panelchild;
+    private javax.swing.JTextField txt_CourseName;
+    private javax.swing.JTextField txt_amount;
+    private javax.swing.JTextArea txt_areaRemarks;
+    private javax.swing.JTextField txt_bankName;
+    private javax.swing.JTextField txt_checkNo;
+    private javax.swing.JTextField txt_edutax;
+    private javax.swing.JTextField txt_firstYear;
+    private javax.swing.JTextField txt_lastYear;
+    private javax.swing.JTextField txt_receipts;
+    private javax.swing.JTextField txt_receivedFrom;
+    private javax.swing.JTextField txt_totalAmount;
+    private javax.swing.JTextField txt_vat;
+    private javax.swing.JTextField txt_words;
     // End of variables declaration//GEN-END:variables
 }
