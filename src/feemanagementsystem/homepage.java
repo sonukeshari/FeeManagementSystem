@@ -28,7 +28,7 @@ public class homepage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lbl_Addfee = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -58,12 +58,17 @@ public class homepage extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setBackground(new java.awt.Color(153, 0, 153));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feemanagementsystem/images/plus.png"))); // NOI18N
-        jLabel1.setText("    Add Fees");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 2, 250, 156));
+        lbl_Addfee.setBackground(new java.awt.Color(153, 0, 153));
+        lbl_Addfee.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lbl_Addfee.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_Addfee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feemanagementsystem/images/plus.png"))); // NOI18N
+        lbl_Addfee.setText("    Add Fees");
+        lbl_Addfee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_AddfeeMouseClicked(evt);
+            }
+        });
+        jPanel2.add(lbl_Addfee, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 2, 250, 156));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 260, 160));
 
@@ -180,6 +185,13 @@ public class homepage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lbl_AddfeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_AddfeeMouseClicked
+        // TODO add your handling code here:
+        Addfee addfee = new Addfee();
+        addfee.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbl_AddfeeMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -216,7 +228,6 @@ public class homepage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -235,5 +246,6 @@ public class homepage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel lbl_Addfee;
     // End of variables declaration//GEN-END:variables
 }
