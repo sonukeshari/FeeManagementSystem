@@ -284,8 +284,8 @@ public class Addfee extends javax.swing.JFrame {
 
         jLabel20.setBackground(new java.awt.Color(51, 102, 255));
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel20.setText("RollNO:");
-        panelchild.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 70, 20));
+        jLabel20.setText("SN");
+        panelchild.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 40, 20));
 
         jLabel21.setBackground(new java.awt.Color(51, 102, 255));
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
