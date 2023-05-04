@@ -4,6 +4,8 @@
  */
 package feemanagementsystem;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Sonu Keshari
@@ -23,6 +25,40 @@ public class Addfee extends javax.swing.JFrame {
      
      txt_checkNo.setVisible(false);
      txt_bankName.setVisible(false);
+ }
+ public boolean validation(){
+    if(txt_receivedFrom.getText().equals("")) {
+        JOptionPane.showMessageDialog(this,"Please write username ");
+              return false;
+    }
+    if(datechooser.getDate()==null) {
+        JOptionPane.showMessageDialog(this,"Please Select date");
+              return false;
+    }
+    
+    if(txt_amount.getText().equals("")) {
+        JOptionPane.showMessageDialog(this,"Please enter your amount(in digits) ");
+              return false;
+    }
+    
+    if (comboPaymentMode.getSelectedItem().toString().equalsIgnoreCase("Cheque")){
+       if(txt_checkNo.getText().equals("")){
+           JOptionPane.showMessageDialog(this,"Please enter your check number ");
+              return false;
+       }
+       if(txt_bankName.getText().equals("")){
+          JOptionPane.showMessageDialog(this,"Please enter your Bank name ");
+              return false; 
+       }
+   }
+   if (comboPaymentMode.getSelectedItem().toString().equalsIgnoreCase("card")){
+       
+       if(txt_bankName.getText().equals("")){
+       JOptionPane.showMessageDialog(this,"Please enter your bank name");
+       return false;
+               }
+   }
+    return true;
  }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -220,7 +256,7 @@ public class Addfee extends javax.swing.JFrame {
         lbl_BankName.setText("Bank Name");
 
         comboPaymentMode.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        comboPaymentMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Cheque", "Card" }));
+        comboPaymentMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Cheque", "card" }));
         comboPaymentMode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboPaymentModeActionPerformed(evt);
@@ -272,7 +308,6 @@ public class Addfee extends javax.swing.JFrame {
         panelchild.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 100, 20));
 
         comboxCourse.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        comboxCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Cheque", "Card" }));
         panelchild.add(comboxCourse, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 190, 30));
 
         jLabel19.setBackground(new java.awt.Color(51, 102, 255));
@@ -307,6 +342,12 @@ public class Addfee extends javax.swing.JFrame {
         jLabel24.setText("Edutax 7.5%");
         panelchild.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, -1, 20));
         panelchild.add(txt_CourseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 300, 30));
+
+        txt_amount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_amountActionPerformed(evt);
+            }
+        });
         panelchild.add(txt_amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 180, 160, 30));
         panelchild.add(txt_vat, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 160, 30));
         panelchild.add(txt_edutax, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 258, 160, -1));
@@ -339,6 +380,11 @@ public class Addfee extends javax.swing.JFrame {
         btn_print.setBackground(new java.awt.Color(255, 0, 0));
         btn_print.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         btn_print.setText("Print");
+        btn_print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_printActionPerformed(evt);
+            }
+        });
         panelchild.add(btn_print, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, 180, 30));
 
         javax.swing.GroupLayout panelParentLayout = new javax.swing.GroupLayout(panelParent);
@@ -444,6 +490,31 @@ public class Addfee extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comboPaymentModeActionPerformed
 
+    private void btn_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_printActionPerformed
+        // TODO add your handling code here:
+        if(validation()==true){
+            JOptionPane.showMessageDialog(this,"validation sucessfull ");
+              
+        }
+    }//GEN-LAST:event_btn_printActionPerformed
+
+    private void txt_amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_amountActionPerformed
+        // TODO add your handling code here:
+        Float amount =Float.parseFloat(txt_amount.getText());
+        
+        Float vat =(amount*0.075f);
+        
+        Float edutax = (amount*0.075f);
+        
+        txt_vat.setText(vat.toString());
+        txt_edutax.setText(edutax.toString());
+        
+        float total = amount+ vat+ edutax;
+        txt_totalAmount.setText(Float.toString(total));
+        
+        txt_words.setText(NumberToWordsConverter.convert((int)total) +  " only");
+    }//GEN-LAST:event_txt_amountActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -473,6 +544,7 @@ public class Addfee extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Addfee().setVisible(true);
             }
