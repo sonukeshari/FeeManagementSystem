@@ -6,6 +6,9 @@ package feemanagementsystem;
 
 
 import javax.swing.JOptionPane;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,14 +20,14 @@ public class Signupform extends javax.swing.JFrame {
      * Creates new form Signupform
      */
    String fname,lname,uname,password,conf_pass,mobileNo;
+    
     public Signupform() {
         initComponents();
+
     }
+   
     
       boolean validation(){
-
-         
-          
           fname= txtfirstname.getText();
           lname = txtlastname.getText();
           uname = txtusername.getText();
@@ -89,8 +92,7 @@ public class Signupform extends javax.swing.JFrame {
               lblcheckmblNo.setText("* MobileNo should be 10 digits");
           }
       }
-        
-      
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -316,13 +318,45 @@ public class Signupform extends javax.swing.JFrame {
 
     private void btnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsignupActionPerformed
         // TODO add your handling code here:
-        validation();
         
+        
+        
+        
+        
+        
+       if(validation()){
+            
+        PreparedStatement ps;
+        String query = "INSERT INTO `signup`(Firstname,Lastname,Username,Password,MobileNo) VALUES (?,?,?,?,?)";
+        
+        try {
+            ps = Database.dbconnect().prepareStatement(query);
+            
+               ps.setString(1, fname);
+               ps.setString(2, lname);
+               ps.setString(3, uname);
+               ps.setString(4, password);
+               ps.setString(5, mobileNo);
+            
+            if(ps.executeUpdate() > 0)
+            {
+                JOptionPane.showMessageDialog(null, "Signup sucessfully");
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Signupform.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+         
     }//GEN-LAST:event_btnsignupActionPerformed
+    // TODO add your handling code here:
+    // TODO add your handling code here:
     // TODO add your handling code here:
 
     private void txtmblnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmblnoActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtmblnoActionPerformed
 
     private void txtpasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyPressed
