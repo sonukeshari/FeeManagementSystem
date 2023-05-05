@@ -148,8 +148,9 @@ public class Addfee extends javax.swing.JFrame {
          ps.setString(13, remark);
          ps.setInt(14,year1);
          ps.setInt(15, year2);
-         ps.setFloat(16,amount);
-         ps.setString(17, rollno);
+          ps.setString(16, rollno);
+         ps.setFloat(17,amount);
+        
          
          
                  int rowcount= ps.executeUpdate();
@@ -611,6 +612,9 @@ public class Addfee extends javax.swing.JFrame {
            String result = dataInsert();
            if(result.equals("success")){
               JOptionPane.showMessageDialog(this,"Record inserted  "); 
+              printReceipt pr = new printReceipt();
+              pr.setVisible(true);
+              this.dispose();
            }
            else{
                JOptionPane.showMessageDialog(this,"Record inserted failed ");
