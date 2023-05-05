@@ -4,7 +4,11 @@
  */
 package feemanagementsystem;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import javax.swing.JOptionPane;
+ 
 
 /**
  *
@@ -18,7 +22,12 @@ public class Addfee extends javax.swing.JFrame {
     public Addfee() {
         initComponents();
         displayCashfirst();
+        fillcombobox();
+        int reciptNO = getReceiptNo();
+        txt_receipts.setText(Integer.toString(reciptNO));
     }
+    
+    
  public void displayCashfirst(){
      lbl_checkNo.setVisible(false);
      lbl_BankName.setVisible(false);
@@ -31,8 +40,8 @@ public class Addfee extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this,"Please write username ");
               return false;
     }
-    if(datechooser.getDate()==null) {
-        JOptionPane.showMessageDialog(this,"Please Select date");
+    if(datechooser.getText()==null) {
+        JOptionPane.showMessageDialog(this,"Please enter date");
               return false;
     }
     
@@ -60,6 +69,104 @@ public class Addfee extends javax.swing.JFrame {
    }
     return true;
  }
+ 
+ public void fillcombobox(){
+     PreparedStatement ps;
+        ResultSet rs;
+        
+         String query = "SELECT coursename FROM `course`";
+         
+         try{
+             ps = Database.dbconnect().prepareStatement(query);
+             rs = ps.executeQuery();
+             
+             while(rs.next()){
+                 comboxCourse.addItem(rs.getString("coursename"));
+             }
+         }catch(Exception ex){
+             ex.printStackTrace();
+         }
+ }
+ public int getReceiptNo(){
+     PreparedStatement ps;
+        ResultSet rs;
+        int receiptNo = 0;
+        String query = "SELECT max(recieptNo) FROM `feedetails`";
+        
+        try{
+             ps = Database.dbconnect().prepareStatement(query);
+             rs = ps.executeQuery();
+             if(rs.next()== true){
+                receiptNo= rs.getInt(1);
+             }
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+     return receiptNo+1;
+ }
+ 
+ public String dataInsert(){
+     String status ="";
+     
+     int recieptNo =Integer.parseInt(txt_receipts.getText()) ;
+     String studentname = txt_receivedFrom.getText();
+     String paymentMode = comboPaymentMode.getSelectedItem().toString();
+     String checkNo = txt_checkNo.getText();
+     String bankname =txt_bankName.getText();
+     String coursename =txt_CourseName.getText();
+     String regNo =lbl_regNo.getText();
+     float totalamount =Float.parseFloat(txt_totalAmount.getText());
+     String date =datechooser.getText();
+     float vat = Float.parseFloat(txt_vat.getText());
+     float edutax=Float.parseFloat(txt_edutax.getText());
+     String totalinword =txt_words.getText();
+     String remark = txt_areaRemarks.getText();
+     int year1 =Integer.parseInt(txt_firstYear.getText());
+     int year2 =Integer.parseInt(txt_lastYear.getText());
+      String rollno =txt_rollno.getText();
+      float amount = Float.parseFloat(txt_amount.getText());
+     
+     PreparedStatement ps;
+        ResultSet rs;
+        
+        String query = "INSERT INTO `feedetails`VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+     try{
+         ps = Database.dbconnect().prepareStatement(query);
+         ps.setInt(1,recieptNo);
+         ps.setString(2, studentname);
+         ps.setString(3, paymentMode);
+         ps.setString(4, checkNo);
+         ps.setString(5, bankname);
+         ps.setString(6,coursename);
+         ps.setString(7, regNo);
+         ps.setFloat(8, totalamount);
+         ps.setString(9,date);
+         ps.setFloat(10, vat);
+         ps.setFloat(11, edutax);
+         ps.setString(12, totalinword);
+         ps.setString(13, remark);
+         ps.setInt(14,year1);
+         ps.setInt(15, year2);
+         ps.setFloat(16,amount);
+         ps.setString(17, rollno);
+         
+         
+                 int rowcount= ps.executeUpdate();
+                if(rowcount==1) {
+                    status ="success";
+                    
+                }
+                else status ="fail";
+                 
+     }catch(Exception ex){
+        ex.printStackTrace(); 
+     }
+     return status;
+ }
+ 
+ 
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -94,7 +201,6 @@ public class Addfee extends javax.swing.JFrame {
         txt_checkNo = new javax.swing.JTextField();
         txt_bankName = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        datechooser = new com.toedter.calendar.JDateChooser();
         jLabel13 = new javax.swing.JLabel();
         lbl_regNo = new javax.swing.JLabel();
         panelchild = new javax.swing.JPanel();
@@ -128,6 +234,8 @@ public class Addfee extends javax.swing.JFrame {
         txt_areaRemarks = new javax.swing.JTextArea();
         jSeparator4 = new javax.swing.JSeparator();
         btn_print = new javax.swing.JButton();
+        txt_rollno = new javax.swing.JTextField();
+        datechooser = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -308,6 +416,11 @@ public class Addfee extends javax.swing.JFrame {
         panelchild.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 100, 20));
 
         comboxCourse.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboxCourse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboxCourseActionPerformed(evt);
+            }
+        });
         panelchild.add(comboxCourse, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 190, 30));
 
         jLabel19.setBackground(new java.awt.Color(51, 102, 255));
@@ -386,6 +499,7 @@ public class Addfee extends javax.swing.JFrame {
             }
         });
         panelchild.add(btn_print, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, 180, 30));
+        panelchild.add(txt_rollno, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 110, -1));
 
         javax.swing.GroupLayout panelParentLayout = new javax.swing.GroupLayout(panelParent);
         panelParent.setLayout(panelParentLayout);
@@ -407,7 +521,8 @@ public class Addfee extends javax.swing.JFrame {
                             .addGroup(panelParentLayout.createSequentialGroup()
                                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(datechooser, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(datechooser, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
                         .addGap(30, 30, 30))
                     .addGroup(panelParentLayout.createSequentialGroup()
                         .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,11 +543,10 @@ public class Addfee extends javax.swing.JFrame {
             .addGroup(panelParentLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel12))
-                        .addComponent(datechooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel12)
+                        .addComponent(datechooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txt_receipts, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -493,7 +607,16 @@ public class Addfee extends javax.swing.JFrame {
     private void btn_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_printActionPerformed
         // TODO add your handling code here:
         if(validation()==true){
-            JOptionPane.showMessageDialog(this,"validation sucessfull ");
+            
+           String result = dataInsert();
+           if(result.equals("success")){
+              JOptionPane.showMessageDialog(this,"Record inserted  "); 
+           }
+           else{
+               JOptionPane.showMessageDialog(this,"Record inserted failed ");
+           }
+               
+            
               
         }
     }//GEN-LAST:event_btn_printActionPerformed
@@ -514,6 +637,11 @@ public class Addfee extends javax.swing.JFrame {
         
         txt_words.setText(NumberToWordsConverter.convert((int)total) +  " only");
     }//GEN-LAST:event_txt_amountActionPerformed
+
+    private void comboxCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxCourseActionPerformed
+        // TODO add your handling code here:
+        txt_CourseName.setText(comboxCourse.getSelectedItem().toString());
+    }//GEN-LAST:event_comboxCourseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -555,7 +683,7 @@ public class Addfee extends javax.swing.JFrame {
     private javax.swing.JButton btn_print;
     private javax.swing.JComboBox<String> comboPaymentMode;
     private javax.swing.JComboBox<String> comboxCourse;
-    private com.toedter.calendar.JDateChooser datechooser;
+    private javax.swing.JTextField datechooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -608,6 +736,7 @@ public class Addfee extends javax.swing.JFrame {
     private javax.swing.JTextField txt_lastYear;
     private javax.swing.JTextField txt_receipts;
     private javax.swing.JTextField txt_receivedFrom;
+    private javax.swing.JTextField txt_rollno;
     private javax.swing.JTextField txt_totalAmount;
     private javax.swing.JTextField txt_vat;
     private javax.swing.JTextField txt_words;
