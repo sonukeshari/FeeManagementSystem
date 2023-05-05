@@ -202,6 +202,11 @@ public class Signupform extends javax.swing.JFrame {
         btnLogin.setBackground(new java.awt.Color(255, 0, 0));
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         lblpasswordcheck.setBackground(new java.awt.Color(102, 0, 102));
         lblpasswordcheck.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -317,13 +322,7 @@ public class Signupform extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsignupActionPerformed
-        // TODO add your handling code here:
-        
-        
-        
-        
-        
-        
+        // TODO add your handling code here: 
        if(validation()){
             
         PreparedStatement ps;
@@ -342,8 +341,8 @@ public class Signupform extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, "Signup sucessfully");
                 
-            }
-            
+         }
+              
         } catch (SQLException ex) {
             Logger.getLogger(Signupform.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -388,6 +387,13 @@ public class Signupform extends javax.swing.JFrame {
         // TODO add your handling code here:
         checkMblNo();
     }//GEN-LAST:event_txtmblnoKeyTyped
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        login login = new login();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,9 @@
 package feemanagementsystem;
 
 import javax.swing.JOptionPane;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +20,38 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
         initComponents();
+    }
+    public void verification(String username,String password){
+        PreparedStatement ps;
+        ResultSet rs;
+        
+         String query = "SELECT * FROM `signup` WHERE `Username` =? AND `Password` =?";
+          try {
+            ps = Database.dbconnect().prepareStatement(query);
+            
+            ps.setString(1, username);
+            ps.setString(2,password);
+            
+            rs = ps.executeQuery();
+            
+            if(rs.next())
+            {
+                    homepage Homepage = new homepage();
+                    Homepage.setVisible(true);
+           
+                    this.dispose();
+            }
+            else{
+                    JOptionPane.showMessageDialog(null, "Incorrect Username Or Password", "Login Failed", 2);
+                }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+         
+         
+         
     }
 
     /**
@@ -110,6 +145,9 @@ public class login extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Please enter your username and password");
              
+        }
+        else{
+            verification( username,password);
         }
     }//GEN-LAST:event_btnloginActionPerformed
 
