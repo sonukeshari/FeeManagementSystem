@@ -315,7 +315,7 @@ public class EditCourse extends javax.swing.JFrame {
         int rowNo = tbl_coursedata.getSelectedRow();
         TableModel model = tbl_coursedata.getModel();
         
-  txt_courseId.setText(model.getValueAt(rowNo, 0).toString());
+   //txt_courseId.setText(model.getValueAt(rowNo, 0).toString());
   txt_courseName.setText((String)model.getValueAt(rowNo,1));
   txt_courseFee.setText(model.getValueAt(rowNo,2).toString());
         
