@@ -82,6 +82,11 @@ public class homepage extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feemanagementsystem/images/search-document.png"))); // NOI18N
         jLabel2.setText("Search Record");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 2, 274, 156));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 290, 160));
@@ -191,6 +196,13 @@ public class homepage extends javax.swing.JFrame {
         addfee.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbl_AddfeeMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        SearchRecord search = new SearchRecord();
+        search.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
