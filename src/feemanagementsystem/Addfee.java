@@ -6,6 +6,7 @@ package feemanagementsystem;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JOptionPane;
  
@@ -40,7 +41,7 @@ public class Addfee extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this,"Please write username ");
               return false;
     }
-    if(datechooser.getText()==null) {
+    if(datechooser.getDate()==null) {
         JOptionPane.showMessageDialog(this,"Please enter date");
               return false;
     }
@@ -116,8 +117,9 @@ public class Addfee extends javax.swing.JFrame {
      String bankname =txt_bankName.getText();
      String coursename =txt_CourseName.getText();
      String regNo =lbl_regNo.getText();
-     float totalamount =Float.parseFloat(txt_totalAmount.getText());
-     String date =datechooser.getText();
+     float totalamout =Float.parseFloat(txt_totalAmount.getText());
+     SimpleDateFormat Date_Format = new SimpleDateFormat("YYYY-MM-dd"); 
+     String date=  Date_Format.format(datechooser.getDate());
      float vat = Float.parseFloat(txt_vat.getText());
      float edutax=Float.parseFloat(txt_edutax.getText());
      String totalinword =txt_words.getText();
@@ -140,7 +142,7 @@ public class Addfee extends javax.swing.JFrame {
          ps.setString(5, bankname);
          ps.setString(6,coursename);
          ps.setString(7, regNo);
-         ps.setFloat(8, totalamount);
+         ps.setFloat(8, totalamout);
          ps.setString(9,date);
          ps.setFloat(10, vat);
          ps.setFloat(11, edutax);
@@ -236,7 +238,7 @@ public class Addfee extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         btn_print = new javax.swing.JButton();
         txt_rollno = new javax.swing.JTextField();
-        datechooser = new javax.swing.JTextField();
+        datechooser = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -255,6 +257,11 @@ public class Addfee extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feemanagementsystem/images/home.png"))); // NOI18N
         jLabel1.setText("    HOME");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 200, 60));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 240, 70));
@@ -269,6 +276,11 @@ public class Addfee extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feemanagementsystem/images/search2.png"))); // NOI18N
         jLabel2.setText("Search Record");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 220, 70));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 240, 70));
@@ -283,6 +295,11 @@ public class Addfee extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feemanagementsystem/images/edit2.png"))); // NOI18N
         jLabel3.setText("Edit Course");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
         jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 220, -1));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 240, 80));
@@ -311,6 +328,14 @@ public class Addfee extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feemanagementsystem/images/view all record.png"))); // NOI18N
         jLabel5.setText("View All Record");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel5MouseEntered(evt);
+            }
+        });
         jPanel7.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 230, 70));
 
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 240, 80));
@@ -325,6 +350,11 @@ public class Addfee extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feemanagementsystem/images/back-button.png"))); // NOI18N
         jLabel6.setText("     Back");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
         jPanel8.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 220, 70));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 240, 70));
@@ -339,6 +369,11 @@ public class Addfee extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feemanagementsystem/images/logout.png"))); // NOI18N
         jLabel7.setText("Logout");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
         jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 40));
 
         jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, 240, 60));
@@ -514,7 +549,7 @@ public class Addfee extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txt_receipts, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(panelParentLayout.createSequentialGroup()
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -522,8 +557,7 @@ public class Addfee extends javax.swing.JFrame {
                             .addGroup(panelParentLayout.createSequentialGroup()
                                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(datechooser, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
+                                .addComponent(datechooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(30, 30, 30))
                     .addGroup(panelParentLayout.createSequentialGroup()
                         .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -542,13 +576,17 @@ public class Addfee extends javax.swing.JFrame {
         panelParentLayout.setVerticalGroup(
             panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelParentLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
                 .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel12)
-                        .addComponent(datechooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_receipts, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelParentLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel12))
+                            .addComponent(txt_receipts, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelParentLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(datechooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -647,6 +685,52 @@ public class Addfee extends javax.swing.JFrame {
         txt_CourseName.setText(comboxCourse.getSelectedItem().toString());
     }//GEN-LAST:event_comboxCourseActionPerformed
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        homepage Home = new homepage();
+        Home.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        SearchRecord search = new SearchRecord();
+        search.setVisible(true);
+        this.dispose();
+           
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        // TODO add your handling code here:
+        EditCourse edit = new EditCourse();
+        edit.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseEntered
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+        ViewRecord viewr = new ViewRecord();
+        viewr.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+        homepage Home = new homepage();
+        Home.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+         System.exit(0);
+    }//GEN-LAST:event_jLabel7MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -687,7 +771,7 @@ public class Addfee extends javax.swing.JFrame {
     private javax.swing.JButton btn_print;
     private javax.swing.JComboBox<String> comboPaymentMode;
     private javax.swing.JComboBox<String> comboxCourse;
-    private javax.swing.JTextField datechooser;
+    private com.toedter.calendar.JDateChooser datechooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

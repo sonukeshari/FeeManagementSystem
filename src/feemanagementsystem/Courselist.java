@@ -4,45 +4,39 @@
  */
 package feemanagementsystem;
 
-import com.mysql.cj.result.Row;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author Sonu Keshari
  */
-public class SearchRecord extends javax.swing.JFrame {
+public class Courselist extends javax.swing.JFrame {
 
     /**
-     * Creates new form SearchRecord
+     * Creates new form Courselist
      */
     DefaultTableModel model;
-     public SearchRecord() {
+    public Courselist() {
         initComponents();
-        setRecordToTable();
+        setCourseToTable();
     }
-    public void setRecordToTable(){
+    public void setCourseToTable(){
         PreparedStatement ps;
         ResultSet rs;
-        String query = "SELECT * FROM feedetails";
+        String query = "SELECT * FROM course";
         try{
             ps = Database.dbconnect().prepareStatement(query);
             rs = ps.executeQuery();
             while( rs.next()){
-                String recieptNo =rs.getString("recieptNo");
-                String rollno = rs.getString("rollno");
-                String studentname = rs.getString("studentname");
-                String paymentMode = rs.getString("paymentMode");
-                String coursename  = rs.getString("coursename");
-                float amount = rs.getFloat("amount");
-                String remark = rs.getString("remark");
+                String courseId =rs.getString("Id");
+                String courseName = rs.getString("coursename");
+                String courseFee = rs.getString("cost");
                 
-                Object[] obj = {recieptNo,rollno ,studentname,coursename,paymentMode,amount,remark};
-                model = (DefaultTableModel) tblsearchtable.getModel();
+                
+                Object[] obj = {courseId,courseName,courseFee};
+                model = (DefaultTableModel) tbl_courselist.getModel();
                 model.addRow(obj);
                 
                 
@@ -55,16 +49,6 @@ public class SearchRecord extends javax.swing.JFrame {
             
         }
     }
-    
-    public void search(String str){
-        model = (DefaultTableModel) tblsearchtable.getModel();
-
-        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<>(model);
-        tblsearchtable.setRowSorter(trs);
-        trs.setRowFilter(RowFilter.regexFilter(str));
-        
-    }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,6 +60,9 @@ public class SearchRecord extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_courselist = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -90,19 +77,30 @@ public class SearchRecord extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblsearchtable = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        txt_Searchrecord = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(153, 0, 153));
-        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tbl_courselist.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "courseId", "CourseName", "Course price"
+            }
+        ));
+        jScrollPane1.setViewportView(tbl_courselist);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 117, 520, 530));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 600, 690));
+
+        jPanel2.setBackground(new java.awt.Color(153, 0, 153));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(153, 0, 153));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -121,7 +119,7 @@ public class SearchRecord extends javax.swing.JFrame {
         });
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 200, 60));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 240, 70));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 240, 70));
 
         jPanel4.setBackground(new java.awt.Color(153, 0, 153));
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -140,7 +138,7 @@ public class SearchRecord extends javax.swing.JFrame {
         });
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 220, 70));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 240, 70));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 240, 70));
 
         jPanel5.setBackground(new java.awt.Color(153, 0, 153));
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -159,7 +157,7 @@ public class SearchRecord extends javax.swing.JFrame {
         });
         jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 220, -1));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 240, 80));
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 240, 80));
 
         jPanel6.setBackground(new java.awt.Color(153, 0, 153));
         jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -171,14 +169,9 @@ public class SearchRecord extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feemanagementsystem/images/list_1.png"))); // NOI18N
         jLabel4.setText("Course List");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-        });
         jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 60));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 240, 80));
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 240, 80));
 
         jPanel7.setBackground(new java.awt.Color(153, 0, 153));
         jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -194,10 +187,13 @@ public class SearchRecord extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel5MouseEntered(evt);
+            }
         });
         jPanel7.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 230, 70));
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 240, 80));
+        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 240, 80));
 
         jPanel8.setBackground(new java.awt.Color(153, 0, 153));
         jPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -216,7 +212,7 @@ public class SearchRecord extends javax.swing.JFrame {
         });
         jPanel8.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 220, 70));
 
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 240, 70));
+        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 240, 70));
 
         jPanel9.setBackground(new java.awt.Color(153, 0, 153));
         jPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -235,55 +231,16 @@ public class SearchRecord extends javax.swing.JFrame {
         });
         jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 40));
 
-        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, 240, 60));
+        jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, 240, 60));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 680));
-
-        jPanel2.setBackground(new java.awt.Color(102, 102, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tblsearchtable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Reciept No", "Roll No", "StudentName", "course", "paymentMode", "Amount", "Remark"
-            }
-        ));
-        jScrollPane1.setViewportView(tblsearchtable);
-
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 800, 530));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
-        jLabel8.setText("Search Records");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 260, 40));
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel9.setText("Enter Search String");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 230, 30));
-
-        txt_Searchrecord.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_SearchrecordKeyReleased(evt);
-            }
-        });
-        jPanel2.add(txt_Searchrecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 240, 30));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 840, 680));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 690));
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txt_SearchrecordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_SearchrecordKeyReleased
-        // TODO add your handling code here:
-        String searchString = txt_Searchrecord.getText();
-        search(searchString);
-    }//GEN-LAST:event_txt_SearchrecordKeyReleased
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
-         homepage Home = new homepage();
+        homepage Home = new homepage();
         Home.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
@@ -293,33 +250,31 @@ public class SearchRecord extends javax.swing.JFrame {
         SearchRecord search = new SearchRecord();
         search.setVisible(true);
         this.dispose();
-           
+
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
-       EditCourse edit = new EditCourse();
+        EditCourse edit = new EditCourse();
         edit.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jLabel3MouseClicked
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        // TODO add your handling code here:
-        Courselist course = new Courselist();
-        course.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-         ViewRecord viewr = new ViewRecord();
+        ViewRecord viewr = new ViewRecord();
         viewr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
 
+    private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseEntered
+
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
-         homepage Home = new homepage();
+        homepage Home = new homepage();
         Home.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel6MouseClicked
@@ -346,20 +301,20 @@ public class SearchRecord extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SearchRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Courselist.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SearchRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Courselist.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SearchRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Courselist.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SearchRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Courselist.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SearchRecord().setVisible(true);
+                new Courselist().setVisible(true);
             }
         });
     }
@@ -372,8 +327,6 @@ public class SearchRecord extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -384,7 +337,6 @@ public class SearchRecord extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblsearchtable;
-    private javax.swing.JTextField txt_Searchrecord;
+    private javax.swing.JTable tbl_courselist;
     // End of variables declaration//GEN-END:variables
 }

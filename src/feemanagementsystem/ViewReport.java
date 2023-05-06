@@ -6,44 +6,86 @@ package feemanagementsystem;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.JOptionPane;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
  * @author Sonu Keshari
  */
-public class EditCourse extends javax.swing.JFrame {
+public class ViewReport extends javax.swing.JFrame {
 
     /**
-     * Creates new form EditCourse
+     * Creates new form ViewReport
      */
-     DefaultTableModel model;
-    public EditCourse() {
+    DefaultTableModel model;
+    public ViewReport() {
         initComponents();
-        setCourseToTable();
+        fillcombobox();
     }
-     public void setCourseToTable(){
+    public void fillcombobox(){
+     PreparedStatement ps;
+        ResultSet rs;
+        
+         String query = "SELECT coursename FROM `course`";
+         
+         try{
+             ps = Database.dbconnect().prepareStatement(query);
+             rs = ps.executeQuery();
+             
+             while(rs.next()){
+                 courseComboBox.addItem(rs.getString("coursename"));
+             }
+         }catch(Exception ex){
+             ex.printStackTrace();
+         }
+ }
+    
+    public void setCourseToTable(){
         PreparedStatement ps;
         ResultSet rs;
-        String query = "SELECT * FROM course";
+        
+       
+        
+         String coursename =courseComboBox.getSelectedItem().toString();
+          SimpleDateFormat Date_Format = new SimpleDateFormat("YYYY-MM-dd"); 
+        String datefrom=  Date_Format.format(datechooser1.getDate());
+        String dateto=  Date_Format.format(datechooser2.getDate());
+        String query = "select * from feedetails where  coursename=? " ;
+        
+        
+         Float totalAmount = 50.0f;
+        
         try{
             ps = Database.dbconnect().prepareStatement(query);
+            
+           // ps.setString(1,datefrom);
+           // ps.setString(2,dateto);
+            ps.setString(1,coursename);
+            
             rs = ps.executeQuery();
             while( rs.next()){
-                String courseId =rs.getString("Id");
+                String recieptno =rs.getString("recieptno");
+                //String rollno = rs.getString("rollno");
+                String studentname = rs.getString("studentname");
                 String courseName = rs.getString("coursename");
-                String courseFee = rs.getString("cost");
+                float amount = rs.getFloat("totalamout");
+                String remark = rs.getString("remark");
                 
-                
-                Object[] obj = {courseId,courseName,courseFee};
-                model = (DefaultTableModel) tbl_coursedata.getModel();
+                totalAmount = totalAmount + amount;
+                Object[] obj = {recieptno,studentname,courseName,amount,remark};
+                model = (DefaultTableModel) tbl_ViewReport.getModel();
                 model.addRow(obj);
                 
                 
             
         }
+            lbl_courseSelected.setText(coursename);
+            lbl_totalAmount.setText(totalAmount.toString());
+            lbl_amountinwords.setText(NumberToWordsConverter.convert(totalAmount.intValue()));
+            
            
             
         }catch(Exception ex){
@@ -51,99 +93,13 @@ public class EditCourse extends javax.swing.JFrame {
             
         }
     }
-     
-     public void addCourse(int Id,String coursename, double courseFee){
-          PreparedStatement ps;
-        ResultSet rs;
-        String query = "insert into course(Id,coursename,cost) values(?,?,?)";
-     
-         try{
-          ps = Database.dbconnect().prepareStatement(query);
-            ps.setInt(1,Id);
-            ps.setString(2,coursename);
-            ps.setDouble(3, courseFee);
-            
-            int rowCount = ps.executeUpdate();
-            
-            if(rowCount ==1){
-                JOptionPane.showMessageDialog(null, "course added sucessfully");
-                clearTable(); 
-                setCourseToTable();
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "course added failed");
-            }
-            
-         }catch(Exception ex){
-               JOptionPane.showMessageDialog(null, "course added failed");
-             ex.printStackTrace();
-         }
-     }
-     public void clearTable(){
-         DefaultTableModel model = (DefaultTableModel)tbl_coursedata.getModel();
+    
+    public void clearTable(){
+         DefaultTableModel model = (DefaultTableModel)tbl_ViewReport.getModel();
          model.setRowCount(0);
      }
-     
-     public void updatetable(int Id,String coursename,double courseFee){
-         
-          PreparedStatement ps;
-        ResultSet rs;
-        String query = " update course set coursename=?, cost=? where id=?";
-     
-         try{
-          ps = Database.dbconnect().prepareStatement(query);
-           
-            ps.setString(1,coursename);
-            ps.setDouble(2, courseFee);
-             ps.setInt(3,Id);
-             
-            int rowCount = ps.executeUpdate();
-            
-            if(rowCount ==1){
-                JOptionPane.showMessageDialog(null, "course updated sucessfully");
-                clearTable(); 
-                setCourseToTable();
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "course updation failed");
-            }
-            
-         }catch(Exception ex){
-               JOptionPane.showMessageDialog(null, "course updation failed");
-             ex.printStackTrace();
-         }
-         
-     }
-     
-       public void delete(int Id){
-         
-          PreparedStatement ps;
-        ResultSet rs;
-        String query = " delete from course where id=?";
-     
-         try{
-          ps = Database.dbconnect().prepareStatement(query);
-           
-            
-             ps.setInt(1,Id);
-             
-            int rowCount = ps.executeUpdate();
-            
-            if(rowCount ==1){
-                JOptionPane.showMessageDialog(null, "course  Deleted ");
-                clearTable(); 
-                setCourseToTable();
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "course deletion failed");
-            }
-            
-         }catch(Exception ex){
-               JOptionPane.showMessageDialog(null, "course deletion failed");
-             ex.printStackTrace();
-         }
-         
-     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -170,17 +126,24 @@ public class EditCourse extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_coursedata = new javax.swing.JTable();
-        txt_courseName = new javax.swing.JTextField();
-        txt_courseFee = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        btn_add = new javax.swing.JButton();
-        btn_update = new javax.swing.JButton();
-        btn_delete = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        txt_courseId = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        courseComboBox = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        btn_submit = new javax.swing.JButton();
+        btn_print = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_ViewReport = new javax.swing.JTable();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        lbl_courseSelected = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        lbl_totalAmount = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        lbl_amountinwords = new javax.swing.JLabel();
+        datechooser1 = new com.toedter.calendar.JDateChooser();
+        datechooser2 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -302,83 +265,120 @@ public class EditCourse extends javax.swing.JFrame {
 
         jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 240, 60));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 670));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 650));
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel2.setBackground(new java.awt.Color(0, 153, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tbl_coursedata.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setText("Select course:");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 110, 20));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setText("Select Date:");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 90, 20));
+
+        jPanel2.add(courseComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 160, 30));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setText("From");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 40, 20));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setText("to");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 20, 20));
+
+        btn_submit.setBackground(new java.awt.Color(255, 255, 0));
+        btn_submit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_submit.setText("Submit");
+        btn_submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_submitActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 110, 30));
+
+        btn_print.setBackground(new java.awt.Color(51, 255, 0));
+        btn_print.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_print.setText("Print");
+        btn_print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_printActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_print, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 110, 30));
+
+        tbl_ViewReport.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Course Id", "Course Name", "Course Fee"
+                "RecieptNo", "Student Name", "Course", "Amount", "Remark"
             }
         ));
-        tbl_coursedata.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_coursedataMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tbl_coursedata);
+        jScrollPane1.setViewportView(tbl_ViewReport);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 330, 500));
-        jPanel2.add(txt_courseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 210, 30));
-        jPanel2.add(txt_courseFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 210, 30));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 740, 440));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel9.setText("Course Name");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 140, 30));
+        jPanel10.setBackground(new java.awt.Color(0, 153, 204));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel10.setText("Course Fee");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 140, 30));
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setText("Course Selected");
 
-        btn_add.setBackground(new java.awt.Color(0, 153, 0));
-        btn_add.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_add.setText("Add");
-        btn_add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_addActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 100, 30));
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel14.setText("Total Amount Collected");
 
-        btn_update.setBackground(new java.awt.Color(0, 0, 255));
-        btn_update.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_update.setText("Update");
-        btn_update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_updateActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btn_update, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, 110, 30));
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel16.setText("Amount in words");
 
-        btn_delete.setBackground(new java.awt.Color(255, 0, 0));
-        btn_delete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_delete.setText("Delete");
-        btn_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_deleteActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btn_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 110, 30));
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_courseSelected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_totalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbl_amountinwords, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbl_courseSelected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_totalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_amountinwords, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel8.setText("Course Id");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 130, 30));
+        jPanel2.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 360, 150));
+        jPanel2.add(datechooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 100, -1));
+        jPanel2.add(datechooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 110, -1));
 
-        txt_courseId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_courseIdActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txt_courseId, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 210, 30));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 780, 670));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 770, 650));
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
@@ -395,56 +395,34 @@ public class EditCourse extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-        // TODO add your handling code here:
-         int Id = Integer.parseInt(txt_courseId.getText());
-        String coursename =txt_courseName.getText();
-        double courseFee = Double.parseDouble(txt_courseFee.getText());
-        
-        updatetable(Id, coursename, courseFee);
-        
-        
-    }//GEN-LAST:event_btn_updateActionPerformed
-
-    private void tbl_coursedataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_coursedataMouseClicked
-        // TODO add your handling code here:
-        int rowNo = tbl_coursedata.getSelectedRow();
-        TableModel model = tbl_coursedata.getModel();
-        
-   txt_courseId.setText(model.getValueAt(rowNo, 0).toString());
-  txt_courseName.setText((String)model.getValueAt(rowNo,1));
-  txt_courseFee.setText(model.getValueAt(rowNo,2).toString());
-        
-        
-    }//GEN-LAST:event_tbl_coursedataMouseClicked
-
-    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
-        // TODO add your handling code here:
-        int Id = Integer.parseInt(txt_courseId.getText());
-        String coursename =txt_courseName.getText();
-        double courseFee = Double.parseDouble(txt_courseFee.getText());
-        
-        addCourse(Id,coursename,courseFee);
-    }//GEN-LAST:event_btn_addActionPerformed
-
-    private void txt_courseIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_courseIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_courseIdActionPerformed
-
-    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        // TODO add your handling code here:
-         int Id = Integer.parseInt(txt_courseId.getText());
-        
-        
-        delete(Id);
-    }//GEN-LAST:event_btn_deleteActionPerformed
-
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
         EditCourse edit = new EditCourse();
         edit.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
+        // TODO add your handling code here:
+        clearTable(); 
+        setCourseToTable();
+    }//GEN-LAST:event_btn_submitActionPerformed
+
+    private void btn_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_printActionPerformed
+        // TODO add your handling code here:
+         SimpleDateFormat Date_Format = new SimpleDateFormat("YYYY-MM-dd"); 
+        String datefrom=  Date_Format.format(datechooser1.getDate());
+      String dateto=  Date_Format.format(datechooser2.getDate());
+       
+        MessageFormat header=new MessageFormat("Report From "+datefrom+" To " +dateto);
+MessageFormat footer=new MessageFormat("page{0,number,integer}");
+        try {
+            tbl_ViewReport.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+            
+        } catch (Exception e) {
+            e.getMessage();
+        } 
+    }//GEN-LAST:event_btn_printActionPerformed
 
     /**
      * @param args the command line arguments
@@ -463,30 +441,36 @@ public class EditCourse extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditCourse().setVisible(true);
+                new ViewReport().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_add;
-    private javax.swing.JButton btn_delete;
-    private javax.swing.JButton btn_update;
+    private javax.swing.JButton btn_print;
+    private javax.swing.JButton btn_submit;
+    private javax.swing.JComboBox<String> courseComboBox;
+    private com.toedter.calendar.JDateChooser datechooser1;
+    private com.toedter.calendar.JDateChooser datechooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -496,6 +480,7 @@ public class EditCourse extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -505,9 +490,9 @@ public class EditCourse extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbl_coursedata;
-    private javax.swing.JTextField txt_courseFee;
-    private javax.swing.JTextField txt_courseId;
-    private javax.swing.JTextField txt_courseName;
+    private javax.swing.JLabel lbl_amountinwords;
+    private javax.swing.JLabel lbl_courseSelected;
+    private javax.swing.JLabel lbl_totalAmount;
+    private javax.swing.JTable tbl_ViewReport;
     // End of variables declaration//GEN-END:variables
 }
