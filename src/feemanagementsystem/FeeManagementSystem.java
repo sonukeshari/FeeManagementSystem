@@ -15,6 +15,8 @@ public class FeeManagementSystem {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        login Login = new login();
+        Login.setVisible(true);
     }
     
 }
