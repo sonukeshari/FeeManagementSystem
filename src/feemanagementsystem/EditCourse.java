@@ -181,6 +181,7 @@ public class EditCourse extends javax.swing.JFrame {
         btn_delete = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txt_courseId = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -395,7 +396,11 @@ public class EditCourse extends javax.swing.JFrame {
         });
         jPanel2.add(txt_courseId, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 210, 30));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 780, 670));
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel11.setText("Edit Course");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 250, 70));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 800, 670));
 
         pack();
         setLocationRelativeTo(null);
@@ -490,6 +495,7 @@ public class EditCourse extends javax.swing.JFrame {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this,"Do you want to logout");
         System.exit(0);
         
     }//GEN-LAST:event_jLabel7MouseClicked
@@ -535,6 +541,7 @@ public class EditCourse extends javax.swing.JFrame {
     private javax.swing.JButton btn_update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

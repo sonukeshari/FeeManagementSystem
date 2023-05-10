@@ -4,6 +4,8 @@
  */
 package feemanagementsystem;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Sonu Keshari
@@ -45,6 +47,7 @@ public class homepage extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -177,6 +180,11 @@ public class homepage extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feemanagementsystem/images/logout.png"))); // NOI18N
         jLabel7.setText("Logout");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
         jPanel8.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 140, 70));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 170, 70));
@@ -191,18 +199,27 @@ public class homepage extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/feemanagementsystem/images/about.png"))); // NOI18N
         jLabel8.setText("About");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
         jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 150, 60));
 
         jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 500, 180, 70));
 
         jLabel9.setBackground(new java.awt.Color(153, 0, 153));
         jLabel9.setFont(new java.awt.Font("Segoe UI", 3, 25)); // NOI18N
-        jLabel9.setText("            FeeFort");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 240, 50));
+        jLabel9.setText("Fee Management System");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 330, 50));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 3, 23)); // NOI18N
-        jLabel10.setText("      Secure and Easy Fee Management Solution");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 510, 40));
+        jLabel10.setText("      Secure and Easy Management Solution");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 510, 40));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 25)); // NOI18N
+        jLabel1.setText("      FOR");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 150, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 590));
 
@@ -254,6 +271,19 @@ public class homepage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
 
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this,"Do you want to logout");
+        System.exit(0);
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+        About about = new About();
+        about.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel8MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -290,6 +320,7 @@ public class homepage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

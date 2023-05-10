@@ -761,6 +761,7 @@ public class UpdateFeedetails extends javax.swing.JFrame {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this,"Do you want to logout");
         System.exit(0);
     }//GEN-LAST:event_jLabel7MouseClicked
 

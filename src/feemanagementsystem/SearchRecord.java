@@ -7,6 +7,7 @@ package feemanagementsystem;
 import com.mysql.cj.result.Row;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -326,6 +327,7 @@ public class SearchRecord extends javax.swing.JFrame {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this,"Do you want to logout");
         System.exit(0);
     }//GEN-LAST:event_jLabel7MouseClicked
 

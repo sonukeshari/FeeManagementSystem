@@ -340,7 +340,9 @@ public class Signupform extends javax.swing.JFrame {
             if(ps.executeUpdate() > 0)
             {
                 JOptionPane.showMessageDialog(null, "Signup sucessfully");
-                
+                login login = new login();
+                login.setVisible(true);
+                       this.dispose();
          }
               
         } catch (SQLException ex) {

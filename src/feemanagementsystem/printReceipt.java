@@ -12,6 +12,7 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -589,6 +590,7 @@ public class printReceipt extends javax.swing.JFrame {
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this,"Do you want to logout");
         System.exit(0);
         
     }//GEN-LAST:event_jLabel8MouseClicked
